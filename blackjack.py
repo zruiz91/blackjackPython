@@ -16,175 +16,169 @@
 ## The cards in the list have equal probability of being drawn.
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
-import random
+
+
+
+
+
+
+# import random
+# import art
+
+# logo = art.logo
+
+# def deal():
+#   return 
+
+
+# def winning_message(user_hand, dealer_hand, current_user_score, current_dealer_score):
+#     return print(f"Your final hand: {user_hand}, final score: {current_user_score}\n Computer's final hand: {dealer_hand}, final score: {current_dealer_score}\n You win 😁")
+        
+# def losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score):
+#     return print(f"Your final hand: {user_hand}, final score: {current_user_score}\n Computer's final hand: {dealer_hand}, final score: {current_dealer_score}\n You lose 😭")
+
+# def game_status(user_hand, current_user_score, dealer_hand):
+#     return print(f"Your cards: {user_hand}, current score: {current_user_score}\n Computer's first card: {dealer_hand[0]}")
+
+# def dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over):
+  
+#     dealer_hand.append(random.choice(cards))
+
+#     current_dealer_score += dealer_hand[-1]
+
+#     if current_dealer_score > current_user_score and current_dealer_score <= blackjack_limit:
+
+#       game_over = True
+      
+#       return current_dealer_score, losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
+        
+        
+
+#     if current_dealer_score > blackjack_limit:
+
+#       game_over = True
+      
+#       return current_dealer_score, winning_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
+
+      
+
+#     if current_dealer_score == blackjack_limit and current_user_score == blackjack_limit:
+
+#       game_over = True
+      
+#       return current_dealer_score, print("Draw")
+        
+
+
+
+# # Your cards: [10, 10], current score: 20
+# # Computer's first card: 6
+# # Type 'y' to get another card, type 'n' to pass:
+
+# start_the_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
+
+# if start_the_game == "y":
+  
+#   cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+#   dealer_hand = random.sample(cards, 2)
+#   user_hand = random.sample(cards, 2)
+#   current_user_score = user_hand[0] + user_hand[1]
+#   current_dealer_score = dealer_hand[0] + dealer_hand[1]
+#   blackjack_limit = 21
+#   game_over = False
+  
+
+#   print(logo)
+#   game_status(user_hand, current_user_score, dealer_hand)
+
+#   hit = input("Type 'y' to get another card, type 'n' to pass: ")
+
+#   if hit == 'y':
+    
+#     game_over = False
+    
+#   elif hit == "n":
+
+#     while current_dealer_score < current_user_score:
+          
+#       dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over)
+
+      
+
+      
+    
+
+#   while not game_over:
+
+#     user_hand.append(random.choice(cards))
+    
+#     current_user_score += user_hand[-1]
+    
+#     if current_user_score <= blackjack_limit:
+      
+#       game_status(user_hand, current_user_score, dealer_hand)
+
+      
+
+
+        
+#     if current_user_score > blackjack_limit:
+            
+#       losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
+
+#       game_over = True
+
+    
+#     hit = input("Type 'y' to get another card, type 'n' to pass: ")
+
+
+#     if hit == "no":
+
+#       game_over = True
+
+#       while current_dealer_score < current_user_score:
+          
+#         dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over)
+            
+import random 
 import art
 
-logo = art.logo
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-def deal():
-  return 
+user_cards = []
+computer_cards = []
 
-
-def winning_message():
-    return score
-
-# Your cards: [10, 10], current score: 20
-# Computer's first card: 6
-# Type 'y' to get another card, type 'n' to pass:
-
-start_the_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
-
-if start_the_game == "y":
+def deal_card():
   
-  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  return random.choice(cards)
 
-  dealer_hand = random.sample(cards, 2)
-  user_hand = random.sample(cards, 2)
-  current_user_score = user_hand[0] + user_hand[1]
-  current_dealer_score = dealer_hand[0] + dealer_hand[1]
-  blackjack_limit = 21
-  game_over = False
+
+def calculate_score(cardList):
+  score = sum(cardList)
+
+  if score == 21:
+    return 0
+
+  if 11 in cardList and score > 21:
+    cardList.remove(11)
+    cardList.append(1)
+    return sum(cardList)
+
+  return score
   
 
-  print(logo)
-  print(f"Your cards: {user_hand}, current score: {current_user_score}")
-  print(f"Computer's first card: {dealer_hand[0]}")
+user_cards.append(deal_card())
+user_cards.append(deal_card())
 
-  hit = input("Type 'y' to get another card, type 'n' to pass: ")
+computer_cards.append(deal_card())
+computer_cards.append(deal_card())
 
-  if hit == 'y':
-    
-    game_over = False
-    
-  elif hit == "n":
+print(computer_cards)
+print(user_cards)
 
-    while current_dealer_score < current_user_score:
-          
-      dealer_hand.append(random.choice(cards))
-
-      current_dealer_score += dealer_hand[-1]
-
-      if current_dealer_score > current_user_score and current_dealer_score <= blackjack_limit:
-
-        print(f"Your final hand: ${user_hand}, final score: {current_user_score}")
-          
-        print(f"Computer's final hand: ${dealer_hand}, final score: {current_dealer_score}")
-
-        print("You lose 😭")
-        
-        game_over = True
-        
-
-      if current_dealer_score > blackjack_limit:
-
-        print(f"Your final hand: {user_hand}, final score: {current_user_score}")
-        
-        print(f"Computer's final hand: {dealer_hand}, final score: {current_dealer_score}")
-
-        print("You win 😁")
-
-        game_over = True
-
-      if current_dealer_score == blackjack_limit and current_user_score == blackjack_limit:
-        
-        print(f"Draw")
-        
-        game_over = True
-
-      
-
-      
-    
-
-  while not game_over:
-
-    user_hand.append(random.choice(cards))
-    
-    current_user_score += user_hand[-1]
-    
-    if current_user_score <= blackjack_limit:
-      
-      # user_hand.append(random.choice(cards))
-    
-      # current_user_score += user_hand[-1]
-      print(f"Your cards: {user_hand}, current score: {current_user_score}")
-    
-      print(f"Computer's first card: {dealer_hand[0]}")
-
-
-        
-    if current_user_score > blackjack_limit:
-            
-      print(f"Your final hand: {user_hand}, final score: {current_user_score}")
-      
-      print(f"Computer's final hand: {dealer_hand}, final score: {current_dealer_score}")
-      
-      print("You went over. You lose 😭")
-
-      game_over = True
-
-    
-      
-
-
-
-      if hit == "no":
-
-        game_over = True
-
-        while current_dealer_score < current_user_score:
-          
-          dealer_hand.append(random.choice(cards))
-
-          current_dealer_score += dealer_hand[-1]
-
-          if current_dealer_score > current_user_score and current_dealer_score <= blackjack_limit:
-
-            print(f"Your final hand: {user_hand}, final score: {current_user_score}")
-          
-            print(f"Computer's final hand: {dealer_hand}, final score: {current_dealer_score}")
-
-            print("You lose 😭")
-
-            # game_over = True
-
-          if current_dealer_score > blackjack_limit:
-
-            print(f"Your final hand: {user_hand}, final score: {current_user_score}")
-          
-            print(f"Computer's final hand: {dealer_hand}, final score: {current_dealer_score}")
-
-            print("You win 😁") 
-
-            # game_over = True
-
-          if current_dealer_score == blackjack_limit and current_user_score == blackjack_limit:
-            
-            print(f"Draw")
-            
-            # game_over = True
-            
-
-        
-    
-    # if current_user_score > blackjack_limit:
-            
-    #   print(f"Your final hand: {user_hand}, final score: {current_user_score}")
-      
-    #   print(f"Computer's final hand: {dealer_hand}, final score: {current_dealer_score}")
-      
-    #   print("You went over. You lose 😭")
-
-    #   game_over = True
-
-
-
-      
-          
-    
-
-    
-  
+print(calculate_score(computer_cards))
+print(calculate_score(user_cards))
   
       
       
