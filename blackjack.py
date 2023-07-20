@@ -138,54 +138,69 @@
 #       game_over = True
 
 #       while current_dealer_score < current_user_score:
-          
+
 #         dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over)
-            
-import random 
+
+import random
 import art
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 user_cards = []
 computer_cards = []
+game_over = False
 
 def deal_card():
-  
-  return random.choice(cards)
+    return random.choice(cards)
 
 
 def calculate_score(cardList):
-  score = sum(cardList)
+    score = sum(cardList)
 
-  if score == 21:
-    return 0
+    if score == 21:
+        return 0
 
-  if 11 in cardList and score > 21:
-    cardList.remove(11)
-    cardList.append(1)
-    return sum(cardList)
+    if 11 in cardList and score > 21:
+        cardList.remove(11)
+        cardList.append(1)
+        return sum(cardList)
 
-  return score
-  
+    return score
+
 
 user_cards.append(deal_card())
 user_cards.append(deal_card())
-
-computer_cards.append(deal_card())
-computer_cards.append(deal_card())
 
 print(computer_cards)
 print(user_cards)
 
+computer_cards.append(deal_card())
+computer_cards.append(deal_card())
+
+while not game_over:
+    if calculate_score(user_cards) == 0:
+        game_over = True
+        print("game over")
+
+    if calculate_score(user_cards) > 21:
+        game_over = True
+        print("game over")
+
+    if calculate_score(computer_cards) == 0:
+        game_over = True
+        print("game over")
+
+    if calculate_score(computer_cards) > 21:
+        game_over = True
+        print("game over")
+
+
+
 print(calculate_score(computer_cards))
 print(calculate_score(user_cards))
-  
-      
-      
-      
-      
-    
- 
+
+
+
 
 
 
