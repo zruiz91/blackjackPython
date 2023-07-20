@@ -148,7 +148,10 @@ cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 user_cards = []
 computer_cards = []
+user_score = 0
+computer_score = 0
 game_over = False
+keep_dealing = True
 
 def deal_card():
     return random.choice(cards)
@@ -177,31 +180,66 @@ print(user_cards)
 computer_cards.append(deal_card())
 computer_cards.append(deal_card())
 
-while not game_over:
-    if calculate_score(user_cards) == 0:
-        game_over = True
-        print("game over")
+user_score = calculate_score(user_cards)
+computer_score = calculate_score(computer_cards)
 
-    if calculate_score(user_cards) > 21:
-        game_over = True
-        print("game over")
+print(f"Your cards: {user_cards}, current score: {calculate_score(user_cards)}")
+print(f"Computer's first card: {computer_cards[0]}")
 
-    if calculate_score(computer_cards) == 0:
-        game_over = True
-        print("game over")
+if user_score == 0:
+    game_over = True
+    print("game over You win")
 
-    if calculate_score(computer_cards) > 21:
-        game_over = True
-        print("game over")
+if user_score > 21:
+    game_over = True
+    print("game over CPU wins")
 
+if computer_score == 0:
+    game_over = True
+    print("game over CPU wins")
 
-
-print(calculate_score(computer_cards))
-print(calculate_score(user_cards))
-
-
+if computer_score > 21:
+    game_over = True
+    print("game over You win")
 
 
+while keep_dealing:
+
+    print(f"Your cards: {user_cards}, current score: {user_score}")
+  
+    print(f"Computer's first card: {computer_cards[0]}")
+    
+    hit = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+  
+
+    if hit == "y":
+      
+      keep_dealing = True
+      user_cards.append(deal_card())
+      
+  
+      if user_score == 0:
+          game_over = True
+          print("game over You win")
+
+      if user_score > 21:
+          game_over = True
+          print("game over CPU wins")
+
+
+    elif hit == "n":
+      keep_dealing = False
+    
+
+
+
+while computer_score < 17:
+    
+    computer_cards.append(deal_card())
+    computer_score = calculate_score(computer_cards)
+
+    
+        
 
 
 
