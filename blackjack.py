@@ -7,8 +7,8 @@
 
 ############### Our Blackjack House Rules #####################
 
-## The deck is unlimited in size. 
-## There are no jokers. 
+## The deck is unlimited in size.
+## There are no jokers.
 ## The Jack/Queen/King all count as 10.
 ## The the Ace can count as 11 or 1.
 ## Use the following list as the deck of cards:
@@ -17,23 +17,17 @@
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
 
-
-
-
-
-
 # import random
 # import art
 
 # logo = art.logo
 
 # def deal():
-#   return 
-
+#   return
 
 # def winning_message(user_hand, dealer_hand, current_user_score, current_dealer_score):
 #     return print(f"Your final hand: {user_hand}, final score: {current_user_score}\n Computer's final hand: {dealer_hand}, final score: {current_dealer_score}\n You win 😁")
-        
+
 # def losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score):
 #     return print(f"Your final hand: {user_hand}, final score: {current_user_score}\n Computer's final hand: {dealer_hand}, final score: {current_dealer_score}\n You lose 😭")
 
@@ -41,7 +35,7 @@
 #     return print(f"Your cards: {user_hand}, current score: {current_user_score}\n Computer's first card: {dealer_hand[0]}")
 
 # def dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over):
-  
+
 #     dealer_hand.append(random.choice(cards))
 
 #     current_dealer_score += dealer_hand[-1]
@@ -49,27 +43,20 @@
 #     if current_dealer_score > current_user_score and current_dealer_score <= blackjack_limit:
 
 #       game_over = True
-      
+
 #       return current_dealer_score, losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
-        
-        
 
 #     if current_dealer_score > blackjack_limit:
 
 #       game_over = True
-      
-#       return current_dealer_score, winning_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
 
-      
+#       return current_dealer_score, winning_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
 
 #     if current_dealer_score == blackjack_limit and current_user_score == blackjack_limit:
 
 #       game_over = True
-      
+
 #       return current_dealer_score, print("Draw")
-        
-
-
 
 # # Your cards: [10, 10], current score: 20
 # # Computer's first card: 6
@@ -78,7 +65,7 @@
 # start_the_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
 
 # if start_the_game == "y":
-  
+
 #   cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 #   dealer_hand = random.sample(cards, 2)
@@ -87,7 +74,6 @@
 #   current_dealer_score = dealer_hand[0] + dealer_hand[1]
 #   blackjack_limit = 21
 #   game_over = False
-  
 
 #   print(logo)
 #   game_status(user_hand, current_user_score, dealer_hand)
@@ -95,43 +81,32 @@
 #   hit = input("Type 'y' to get another card, type 'n' to pass: ")
 
 #   if hit == 'y':
-    
+
 #     game_over = False
-    
+
 #   elif hit == "n":
 
 #     while current_dealer_score < current_user_score:
-          
+
 #       dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over)
-
-      
-
-      
-    
 
 #   while not game_over:
 
 #     user_hand.append(random.choice(cards))
-    
+
 #     current_user_score += user_hand[-1]
-    
+
 #     if current_user_score <= blackjack_limit:
-      
+
 #       game_status(user_hand, current_user_score, dealer_hand)
 
-      
-
-
-        
 #     if current_user_score > blackjack_limit:
-            
+
 #       losing_message(user_hand, dealer_hand, current_user_score, current_dealer_score)
 
 #       game_over = True
 
-    
 #     hit = input("Type 'y' to get another card, type 'n' to pass: ")
-
 
 #     if hit == "no":
 
@@ -141,162 +116,170 @@
 
 #         dealer_hit(cards, dealer_hand, user_hand, current_user_score, current_dealer_score, blackjack_limit, game_over)
 
+
 def play_game():
-  import random
-  import art
-  from replit import clear
+    import random
+    import art
+    from replit import clear
 
-  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-  user_cards = []
-  computer_cards = []
-  user_score = 0  
-  computer_score = 0
-  game_over = False
-  keep_dealing = True
-  logo = art.logo
+    user_cards = []
+    computer_cards = []
+    user_score = 0
+    computer_score = 0
+    game_over = False
+    keep_dealing = True
+    logo = art.logo
 
-  def deal_card():
-    return random.choice(cards)
+    def deal_card():
+        return random.choice(cards)
 
+    def calculate_score(cardList):
+        score = sum(cardList)
 
-  def calculate_score(cardList):
-    score = sum(cardList)
+        if score == 21:
+            return 0
 
-    if score == 21:
-      return 0
+        if 11 in cardList and score > 21:
+            cardList.remove(11)
+            cardList.append(1)
+            return sum(cardList)
 
-    if 11 in cardList and score > 21:
-      cardList.remove(11)
-      cardList.append(1)
-      return sum(cardList)
+        return score
 
-    return score
-
-    #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
-
-  def compare(user_score, computer_score):
-
-    if computer_score == user_score:
-      game_over = True
-      print("3It's a draw.")
-
-    if computer_score > user_score:
-      game_over = True
-      print("4game over CPU wins")
-
-    if computer_score < user_score:
-      game_over = True
-      print("5game over You win")
-
-
-  
-  print(logo)
-
-  user_cards.append(deal_card())
-  user_cards.append(deal_card())
-
-
-  computer_cards.append(deal_card())
-  computer_cards.append(deal_card())
-
-  # For Testing Only 
-  print(computer_cards)
-  print(user_cards)
-
-  user_score = calculate_score(user_cards)
-  computer_score = calculate_score(computer_cards)
-
-  print(f"Your cards: {user_cards}, current score: {calculate_score(user_cards)}")
-  print(f"Computer's first card: {computer_cards[0]}")
-
-  # if user_score == 0:
-  #     keep_dealing = False
-  #     game_over = True
-  #     print("game over You win")
-
-  # if user_score > 21:
-  #     keep_dealing = False
-  #     game_over = True
-  #     print("game over CPU wins")
-
-  # if computer_score == 0:
-  #     keep_dealing = False
-  #     game_over = True
-  #     print("game over CPU wins")
-
-  # if computer_score > 21:
-  #     keep_dealing = False
-  #     game_over = True
-  #     print("game over You win")
-
-
-  while keep_dealing:
-
-      hit = input("Type 'y' to get another card, type 'n' to pass: ").lower()
-  
-
-      if hit == "y":
-
-        clear()
-        keep_dealing = True
-        user_cards.append(deal_card())
-        user_score = calculate_score(user_cards)
-        print(f"Your cards: {user_cards}, current score: {user_score}")
-  
-        print(f"Computer's first card: {computer_cards[0]}")
-    
-      
-      
-  
+    def blackjack_check(user_score, computer_score):
+        # If the user has a blackjack (0), then the user wins.
         if user_score == 0:
-            keep_dealing = False
-            game_over = True
-            print("1game over You win")
-
+            print("3 Blackjack game over You win")
+        # If the user has a blackjack (0), then the user wins.
+        if computer_score == 0:
+            print("3 Blackjack game over CPU win")
+        # If the user_score is over 21, then the user loses.
         if user_score > 21:
+            print("4 Bust game over CPU wins")
+        # If the computer_score is over 21, then the computer loses.
+        if computer_score > 21:
+            print("6 Bust game over You win")
+
+    def compare(user_score, computer_score):
+        # If the computer and user both have the same score, then it's a draw.
+        if computer_score == user_score:
+
+            print("0 It's a draw.")
+
+        blackjack_check(user_score, computer_score)
+        #  If none of the above, then the player with the highest score wins.
+        if computer_score > user_score:
+            print("1 game over CPU wins")
+        if computer_score < user_score:
+            print("2 game over You win")
+
+    print(logo)
+
+    user_cards.append(deal_card())
+    user_cards.append(deal_card())
+
+    computer_cards.append(deal_card())
+    computer_cards.append(deal_card())
+
+    # For Testing Only
+    print(computer_cards)
+    print(user_cards)
+
+    user_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
+
+    print(
+        f"Your cards: {user_cards}, current score: {calculate_score(user_cards)}"
+    )
+    print(f"Computer's first card: {computer_cards[0]}")
+
+    # if user_score == 0:
+    #     keep_dealing = False
+    #     game_over = True
+    #     print("3 Blackjack game over You win")
+
+    # if user_score > 21:
+    #     keep_dealing = False
+    #     game_over = True
+    #     print("4 Bust game over CPU wins")
+
+    # if computer_score == 0:
+    #     keep_dealing = False
+    #     game_over = True
+    #     print("5 Blackjack game over CPU wins")
+
+    # if computer_score > 21:
+    #     keep_dealing = False
+    #     game_over = True
+    #     print("6 Bust game over You win")
+    blackjack_check(user_score, computer_score)
+    while keep_dealing:
+
+        hit = input("Type 'y' to get another card, type 'n' to pass: ").lower()
+
+        if hit == "y":
+
+            clear()
+            keep_dealing = True
+            user_cards.append(deal_card())
+            user_score = calculate_score(user_cards)
+            print(f"Your cards: {user_cards}, current score: {user_score}")
+
+            print(f"Computer's first card: {computer_cards[0]}")
+
+            if user_score == 0:
+                keep_dealing = False
+                game_over = True
+                print("7 Blackjack game over You win")
+
+            if user_score > 21:
+                keep_dealing = False
+                game_over = True
+                print("8 Bust game over CPU wins")
+
+        elif hit == "n":
             keep_dealing = False
-            game_over = True
-            print("2game over CPU wins")
+            print(f"Your cards: {user_cards}, current score: {user_score}")
+
+            print(f"Computer's first card: {computer_cards[0]}")
+
+    if not game_over:
+        while computer_score < 17:
+
+            computer_cards.append(deal_card())
+            computer_score = calculate_score(computer_cards)
+            print(computer_score)
+            print(computer_cards)
+            # if computer_score > 21:
+            #       print("9 Bust game over You win")
+
+        compare(user_score, computer_score)
+
+        game_over = True
+
+    while game_over:
+        start_over = input(
+            "Type 'y' to play again, type 'n' end game: ").lower()
+        if start_over == "y":
+            play_game()
 
 
-      elif hit == "n":
-          keep_dealing = False
-          print(f"Your cards: {user_cards}, current score: {user_score}")
-  
-          print(f"Computer's first card: {computer_cards[0]}")
-
-
-  while game_over == False and computer_score < 17:
-    
-      computer_cards.append(deal_card())
-      computer_score = calculate_score(computer_cards)
-      print(computer_score)
-      print(computer_cards)
-
-        
-
-  compare(user_score, computer_score)
-
-  while game_over:
-      start_over = input("Type 'y' to play again, type 'n' end game: ").lower()
-      if start_over == "y":
-        play_game()
-      
 play_game()
 
 ##################### Hints #####################
 
-#Hint 1: Go to this website and try out the Blackjack game: 
+#Hint 1: Go to this website and try out the Blackjack game:
 #   https://games.washingtonpost.com/games/blackjack/
-#Then try out the completed Blackjack project here: 
+#Then try out the completed Blackjack project here:
 #   http://blackjack-final.appbrewery.repl.run
 
-#Hint 2: Read this breakdown of program requirements: 
+#Hint 2: Read this breakdown of program requirements:
 #   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
 #Then try to create your own flowchart for the program.
 
-#Hint 3: Download and read this flow chart I've created: 
+#Hint 3: Download and read this flow chart I've created:
 #   https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
 
 #Hint 4: Create a deal_card() function that uses the List below to *return* a random card.
@@ -307,8 +290,8 @@ play_game()
 #user_cards = []
 #computer_cards = []
 
-#Hint 6: Create a function called calculate_score() that takes a List of cards as input 
-#and returns the score. 
+#Hint 6: Create a function called calculate_score() that takes a List of cards as input
+#and returns the score.
 #Look up the sum() function to help you do this.
 
 #Hint 7: Inside calculate_score() check for a blackjack (a hand with only 2 cards: ace + 10) and return 0 instead of the actual score. 0 will represent a blackjack in our game.
@@ -326,4 +309,3 @@ play_game()
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
-
